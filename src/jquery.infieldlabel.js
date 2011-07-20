@@ -7,7 +7,7 @@
  * Uses the same license as jQuery, see:
  * http://docs.jquery.com/License
  *
- * @version 0.1.2
+ * @version 0.1.5
  */
 (function ($) {
 
@@ -30,17 +30,14 @@
       // Merge supplied options with default options
       base.options = $.extend({}, $.InFieldLabels.defaultOptions, options);
 
-      // Check if the field is already filled in
-      if (base.$field.val() !== "") {
-        base.$label.hide();
-        base.showing = false;
-      }
-      
-      // set up the position
-      base.$field.wrap('<div style="position: relative" />');
-      base.$field.parent().prepend(base.$label);
-      base.$label.css('position','absolute');
-      base.$label.addClass(base.options.labelClass);
+      // Check if the field is already filled in 
+      // add a short delay to handle autocomplete
+      setTimeout(function() {
+        if (base.$field.val() !== "") {
+          base.$label.hide();
+          base.showing = false;
+        }
+      }, 50);
 
       base.$field.focus(function () {
         base.fadeOnFocus();
@@ -58,6 +55,8 @@
         base.checkForEmpty();
       }).bind('onPropertyChange', function () {
         base.checkForEmpty();
+      }).bind('keyup.infieldlabel', function () {
+        base.checkForEmpty()
       });
     };
 
