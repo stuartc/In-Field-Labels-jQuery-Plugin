@@ -35,6 +35,12 @@
         base.$label.hide();
         base.showing = false;
       }
+      
+      // set up the position
+      base.$field.wrap('<div style="position: relative" />');
+      base.$field.parent().prepend(base.$label);
+      base.$label.css('position','absolute');
+      base.$label.addClass(base.options.labelClass);
 
       base.$field.focus(function () {
         base.fadeOnFocus();
