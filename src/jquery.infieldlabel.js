@@ -30,6 +30,12 @@
       // Merge supplied options with default options
       base.options = $.extend({}, $.InFieldLabels.defaultOptions, options);
 
+      // set up the position
+      base.$field.wrap('<div style="position: relative" />');
+      base.$field.parent().prepend(base.$label);
+      base.$label.css('position','absolute');
+      base.$label.addClass(base.options.labelClass);
+
       // Check if the field is already filled in 
       // add a short delay to handle autocomplete
       setTimeout(function() {
