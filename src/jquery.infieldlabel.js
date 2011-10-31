@@ -31,9 +31,11 @@
       base.options = $.extend({}, $.InFieldLabels.defaultOptions, options);
 
       // set up the position
-      base.$field.wrap('<div style="position: relative" />');
+      base.$field.wrap('<span style="position: relative" />');
       base.$field.parent().prepend(base.$label);
       base.$label.css('position','absolute');
+      base.$label.css('color', base.options.labelColor);
+      base.$label.css('margin', base.options.labelMargin);
       base.$label.addClass(base.options.labelClass);
 
       // Check if the field is already filled in 
@@ -127,7 +129,9 @@
 
   $.InFieldLabels.defaultOptions = {
     fadeOpacity: 0.5, // Once a field has focus, how transparent should the label be
-    fadeDuration: 300 // How long should it take to animate from 1.0 opacity to the fadeOpacity
+    fadeDuration: 300, // How long should it take to animate from 1.0 opacity to the fadeOpacity
+    labelColor: '#000', // Color of label after it has been positioned
+    labelMargin: '8px 0 0 4px' // Margin of label after it has been positioned
   };
 
 
